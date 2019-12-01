@@ -64,7 +64,7 @@ public class LoginPresenter {
                                 //存放主页对象
                                 Global.homePresenter = homePresenter;
                                 homePresenter.init();
-                                break;
+                                return;
                         }
                     }catch (Exception ee){
                         ee.printStackTrace();

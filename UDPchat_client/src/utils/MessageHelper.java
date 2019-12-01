@@ -1,6 +1,7 @@
 package utils;
 
 import constants.Constants;
+import constants.Global;
 import models.ChatMessage;
 import utils.PortHelper;
 
@@ -16,10 +17,13 @@ public class MessageHelper {
         int client_port = PortHelper.getClientPort();
         String server_address = Constants.SERVER_ADDRESS;
         try {
-            DatagramSocket clientSocket = new DatagramSocket(client_port);
+            if(Global.clientSocket == null ){
+                Global.clientSocket = new DatagramSocket(client_port);
+            }
+            DatagramSocket socket = Global.clientSocket;
             DatagramPacket packet = new DatagramPacket(bytes,bytes.length, InetAddress.getByName(server_address),server_port);
-            clientSocket.send(packet);
-            return clientSocket;
+            socket.send(packet);
+            return socket;
         }catch (Exception e)
         {
             e.printStackTrace();
