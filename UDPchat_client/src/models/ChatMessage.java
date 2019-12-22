@@ -1,7 +1,7 @@
 package models;
 
 import net.sf.json.JSONObject;
-
+import com.alibaba.fastjson.JSON;
 public class ChatMessage {
     String msgType = "";
     String fromID = "";
@@ -63,8 +63,10 @@ public class ChatMessage {
     }
 
     public static ChatMessage getInstance(String s){
-        JSONObject jsonObject = JSONObject.fromObject(s);
-        return (ChatMessage)JSONObject.toBean(jsonObject,ChatMessage.class);
+        /*JSONObject jsonObject = JSONObject.fromObject(s);
+        return (ChatMessage)JSONObject.toBean(jsonObject,ChatMessage.class);*/
+        ChatMessage chatMessage=JSON.parseObject(s,ChatMessage.class);
+        return chatMessage;
     }
 
 

@@ -6,6 +6,7 @@ import models.ChatMessage;
 import utils.MessageHelper;
 import utils.PortHelper;
 import views.LoginView;
+import Thread.ClientCaptureThread;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,6 +51,7 @@ public class LoginPresenter {
                                 return;
                             case Constants.MSG_TYPE_LOGIN_SUCCESS:
                                 //全局变量设置个人信息
+
                                 System.out.println("run");
                                 PortHelper.getMyInfo().setUserName(username);
                                 System.out.println("run");
@@ -60,10 +62,16 @@ public class LoginPresenter {
                                 //全局变量设置套接字
                                 Global.clientSocket = sendSocket;
                                 loginView.showLoginSuccess();
+                                loginView.closeLogin();
+
                                 HomePresenter homePresenter = new HomePresenter();
                                 //存放主页对象
                                 Global.homePresenter = homePresenter;
                                 homePresenter.init();
+                                Global.groupChatPresenter=HomePresenter.createGroupChat();
+                                Global.groupChatPresenter.setVisible(false);
+                                ClientCaptureThread clientCaptureThread=new ClientCaptureThread();
+                                clientCaptureThread.start();
                                 return;
                         }
                     }catch (Exception ee){

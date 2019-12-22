@@ -76,6 +76,9 @@ public class LoginView {
     public void clearInput(){
         usernamePanel.setText("");
     }
+    public void closeLogin(){
+        jFrame.dispose();
+    }
 
     //测试
     public static void main(String[] args) {

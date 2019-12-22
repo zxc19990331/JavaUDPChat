@@ -1,3 +1,5 @@
+package Thread;
+
 import constants.Global;
 import models.ChatMessage;
 

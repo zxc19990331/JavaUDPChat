@@ -9,4 +9,6 @@ public class Constants {
     public static final String MSG_TYPE_LOGIN_FAIL = "login_fail";
     public static final String MSG_TYPE_LOGIN_SUCCESS = "login_success";
     public static final String MSG_TYPE_SINGLE_CHAT = "single_chat";
+    public static final String MSG_TYPE_USER_LIST="user_list";
+    public static final String MSG_TYPE_GROUP_CHAT="group_chat";
 }

@@ -44,8 +44,12 @@ public class ServerThread extends Thread {
                 Global.userList.add(newUser);
                 //给该用户发送一条登录成功消息
                 MessageHelper.sendLoginSuccessMsg(client_address,client_port);
+                // 用户登录时，发送已在线用户
+                MessageHelper.sendUserListMsg(client_address,client_port);
                 //给所有用户广播一条新用户登录消息
                 MessageHelper.sendNewLoginMsg(username);
+
+
                 System.out.println("增加了新用户" + username);
                 break;
 
@@ -53,6 +57,13 @@ public class ServerThread extends Thread {
             case Constants.MSG_TYPE_NEW_USER_LOGOUT:
                 String logoutname = chatMessage.getContent();
                 //给所有用户广播一条用户登出消息
+                for(UserInfo user:Global.userList){
+                    if(user.getUserName().equals(logoutname)){
+                        Global.userList.remove(user);
+                        System.out.println("用户"+logoutname+"已退出");
+                        break;
+                    }
+                }
                 MessageHelper.sendNewLoginOutMsg(logoutname);
                 break;
 
@@ -66,6 +77,10 @@ public class ServerThread extends Thread {
                         MessageHelper.sendMsg(chatMessage,toAddress,toPort);
                     }
                 }
+                break;
+            //收到群聊消息，广播群聊
+            case Constants.MSG_TYPE_GROUP_CHAT:
+                MessageHelper.sendBoardcastMsg(chatMessage);
                 break;
         }
     }

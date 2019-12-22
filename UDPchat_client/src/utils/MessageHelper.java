@@ -3,12 +3,16 @@ package utils;
 import constants.Constants;
 import constants.Global;
 import models.ChatMessage;
+import com.alibaba.fastjson.*;
 import utils.PortHelper;
 
 import javax.sound.sampled.Port;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MessageHelper {
 
@@ -37,5 +41,10 @@ public class MessageHelper {
         message.setContent(username);
         byte[] bytes = message.toJsonString().getBytes();
         return sendMsg(bytes);
+    }
+    public static List<String> getUserList(String jasonString){
+        List<String> userList =new ArrayList<String>();
+        userList=JSON.parseArray(jasonString,String.class);
+        return userList;
     }
 }

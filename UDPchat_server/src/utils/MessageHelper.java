@@ -4,10 +4,12 @@ import constants.Constants;
 import constants.Global;
 import models.ChatMessage;
 import models.UserInfo;
+import com.alibaba.fastjson.*;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.*;
 
 public class MessageHelper {
 
@@ -41,6 +43,7 @@ public class MessageHelper {
             InetAddress address = user.getAddress();
             int port = user.getPort();
             //同步阻塞 可以异步？
+            System.out.print("send board");
             sendMsg(bytes,address,port);
         }
     }
@@ -70,7 +73,18 @@ public class MessageHelper {
         chatMessage.setContent(username);
         sendBoardcastMsg(chatMessage);
     }
-
-
-
+    public static List<String> getUser(){
+        List<String> userNameList=new ArrayList<String>();
+        for(UserInfo user:Global.userList){
+            userNameList.add(user.getUserName());
+        }
+        return userNameList;
+    }
+    public static void sendUserListMsg(InetAddress client_address,int client_port){
+        ChatMessage chatMessage=new ChatMessage();
+        chatMessage.setMsgType(Constants.MSG_TYPE_USER_LIST);
+        chatMessage.setContent(JSON.toJSONString(getUser()));
+        System.out.print("json:"+JSON.toJSONString(getUser()));
+        sendMsg(chatMessage,client_address,client_port);
+    }
 }
