@@ -6,7 +6,7 @@ import models.ChatMessage;
 import utils.MessageHelper;
 import utils.PortHelper;
 import views.LoginView;
-import Thread.ClientCaptureThread;
+import thread.ClientCaptureThread;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

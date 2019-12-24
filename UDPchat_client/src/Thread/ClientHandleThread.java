@@ -1,4 +1,4 @@
-package Thread;
+package thread;
 
 import constants.Constants;
 import constants.Global;
@@ -6,11 +6,8 @@ import models.ChatMessage;
 import presenters.ChatPresenter;
 import presenters.HomePresenter;
 import utils.MessageHelper;
-import views.HomeView;
 
 import java.net.DatagramPacket;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class ClientHandleThread extends Thread {

@@ -60,8 +60,8 @@ private JButton groupButton;
     public void setWindowClose(WindowListener windowListener){
        this.addWindowListener(windowListener);
     }
-    public void removeLoginOutButton(Button button){
-        mainPanel.remove(button);
+    public void removeLoginOutButton(JButton Jbutton){
+        mainPanel.remove(Jbutton);
     }
     public JPanel getMainPanel(){return this.mainPanel;}
     public void setGroupButtonListener(ActionListener actionListener){groupButton.addActionListener(actionListener);}

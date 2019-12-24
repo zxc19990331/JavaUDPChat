@@ -52,16 +52,16 @@ public class HomePresenter {
         int count=jPanel.getComponentCount();
         for(int i=0;i<count;i++){
             Object object=jPanel.getComponent(i);
-            if(object instanceof Button){
-                Button buttonTemp=(Button)object;
+            if(object instanceof JButton){
+                JButton buttonTemp=(JButton)object;
                 if(buttonTemp.getLabel().equals(outUserName)){
                     homeView.removeLoginOutButton(buttonTemp);
                     break;
                 }
             }
         }
-        homeView.validate();
-
+        homeView.repaint();
+        System.out.print("update");
     }
     /*public void setMyInfo(UserInfo userInfo){
 
